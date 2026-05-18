@@ -72,24 +72,7 @@
 
 %----------------------------------------------------------------------------------------
 %	QUESTION 2
-%----------------------------------------------------------------------------------------
-\begin{question}
-
-\questiontext{Some Python Code}
-
-\begin{minted}{python}
-import numpy as np
-import matplotlib.pyplot as plt
-from typing import Callable
-
-def adder(x):
-	return x + 1
-
-\end{minted}
-\end{question}
-
-%----------------------------------------------------------------------------------------
-%	QUESTION 4
+% Adding a table
 %----------------------------------------------------------------------------------------
 \begin{question}
 
@@ -112,5 +95,29 @@ def adder(x):
 \answer{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor arcu luctus, imperdiet urna iaculis, mattis eros. Pellentesque iaculis odio vel nisl ullamcorper, nec faucibus ipsum molestie. Sed dictum nisl non aliquet porttitor. Etiam vulputate arcu dignissim, finibus sem et, viverra nisl. Aenean luctus congue massa, ut laoreet metus ornare in. Nunc fermentum nisi imperdiet lectus tincidunt vestibulum at ac elit. Nulla mattis nisl eu malesuada suscipit.}
 
 \end{question}
+
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 3
+% Adding an image and math
+%----------------------------------------------------------------------------------------
+\begin{question}
+
+\includegraphics[width=0.9\textwidth]{q2_input_current.png}
+
+
+Begin with model definition
+$$\frac{dV}{dt} = \frac{-V}{RC} + \frac{I}{C}$$
+\begin{align*}
+	\frac{dV}{V - IR} &= \frac{-dt}{RC}\\
+	\text{Some magic and prayers}\\
+	V &= 0.6321 * IR
+\end{align*}
+
+
+
+\end{question}
+
+
 
 \end{document}
