@@ -1,0 +1,90 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Homework entry file.  Build with:  make            (or  make FILE=hw)
+% Structure & commands live in hwstyle.sty / preamble.sty
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+\usepackage{hwstyle}
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+% Required
+\newcommand{\assignmentClassCode}{CLASS-CODE}
+\newcommand{\classTitle}{CLASS-NAME}
+\newcommand{\assignmentTitle}{X}                 % Assignment number/name
+\newcommand{\assignmentQuestionName}{Question}   % Prefix for sections: Question, Problem, ...
+
+% You
+\newcommand{\studentName}{Ian Quah}
+\newcommand{\studentNumber}{2330981}
+
+% Optional (leave empty or delete the line to omit)
+\newcommand{\assignmentDueDate}{}
+\newcommand{\studentID}{itq}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 1
+%----------------------------------------------------------------------------------------
+\begin{question}
+
+\questiontext{Main Question}
+
+\begin{subquestion}{Sub-question 1}
+\answer{
+
+}
+\end{subquestion}
+\end{question}
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 2 -- a table
+%----------------------------------------------------------------------------------------
+\begin{question}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l l l}
+		\toprule
+		\textit{Per 50g} & Pork & Soy \\
+		\midrule
+		Energy & 760kJ & 538kJ\\
+		Protein & 7.0g & 9.3g\\
+		Carbohydrate & 0.0g & 4.9g\\
+		Fat & 16.8g & 9.1g\\
+		Sodium & 0.4g & 0.4g\\
+		Fibre & 0.0g & 1.4g\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\answer{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor arcu luctus, imperdiet urna iaculis, mattis eros. Pellentesque iaculis odio vel nisl ullamcorper, nec faucibus ipsum molestie.}
+
+\end{question}
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 3 -- an image and some math
+%----------------------------------------------------------------------------------------
+\begin{question}
+
+\includegraphics[width=0.9\textwidth]{q2_input_current.png}
+
+Begin with model definition
+$$\frac{dV}{dt} = \frac{-V}{RC} + \frac{I}{C}$$
+\begin{align*}
+	\frac{dV}{V - IR} &= \frac{-dt}{RC}\\
+	\text{Some magic and prayers}\\
+	V &= 0.6321 * IR
+\end{align*}
+
+\end{question}
+
+\end{document}

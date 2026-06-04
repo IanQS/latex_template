@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Shared preamble for the homework / essay templates.
+% Anything common to BOTH document types lives here.
+% Homework-only bits -> hwstyle.sty,  essay-only bits -> essaystyle.sty
+%
+% Original homework template: latextemplates.com/template/cleese-assignment
+% License: CC BY-NC-SA 3.0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{preamble}[2026/06/04 Shared preamble for homework/essay templates]
+
+%----------------------------------------------------------------------------------------
+%	ENCODING & FONT
+%----------------------------------------------------------------------------------------
+\RequirePackage[utf8]{inputenc}      % Input international characters (pdfLaTeX)
+\RequirePackage[T1]{fontenc}         % Output font encoding for those characters
+\RequirePackage[sfdefault,light]{roboto} % Roboto as the default font
+
+%----------------------------------------------------------------------------------------
+%	MARGINS
+%----------------------------------------------------------------------------------------
+\RequirePackage{geometry}
+\geometry{
+	paper=a4paper,   % Change to letterpaper for US letter
+	top=3cm,
+	bottom=3cm,
+	left=2.5cm,
+	right=2.5cm,
+	headheight=14pt,
+	footskip=1.4cm,
+	headsep=1.2cm,
+	%showframe,      % Uncomment to see the type block on the page
+}
+
+%----------------------------------------------------------------------------------------
+%	COMMON PACKAGES
+%----------------------------------------------------------------------------------------
+\RequirePackage{graphicx}            % Insert images
+\RequirePackage{amsmath,amssymb}     % Math environments (align, etc.) + symbols
+\RequirePackage{booktabs}            % Nicer horizontal rules in tables
+\RequirePackage{listings}            % Source-code listings
+\RequirePackage{etoolbox}            % \ifdef / \ifdefempty used by the styles
+\RequirePackage{lastpage}            % "page X of Y" support
+\RequirePackage[most]{tcolorbox}     % Boxes that break across pages
+\RequirePackage{fancyhdr}            % Custom headers/footers (configured per style)
+\RequirePackage[hidelinks]{hyperref} % Clickable refs/links without colored boxes
+
+%----------------------------------------------------------------------------------------
+%	SHARED HELPERS
+%----------------------------------------------------------------------------------------
+\graphicspath{{./images/}}           % Look for figures in ./images
+\newcommand{\codeword}{\texttt}      % Inline code: \codeword{foo}
+
+\endinput

@@ -1,0 +1,51 @@
+#####################################
+# Keys
+[keys.insert]
+"C-[" = "normal_mode"
+C-h = "signature_help"
+
+[keys.normal]
+- = "@zt k"
+# "C-p" = "@:lsp-workspace-command "
+"C-p" = "@:sh "
+"C-r" = "@:rl"
+"ret" = "goto_word"
+C-j     = "page_down"
+C-k     = ["page_up", "goto_window_top"]
+"]" = {f = ["goto_next_function", "flip_selections", "collapse_selection"], F=["goto_next_function", "flip_selections"]}
+"[" = {f = ["goto_prev_function", "collapse_selection"], F=["goto_prev_function", "flip_selections"]}
+
+C-g = [
+    ":write-all",
+    ":new",
+    ":insert-output lazygit",
+    ":buffer-close!",
+    ":redraw",
+    ":reload-all"
+]
+
+[keys.normal.g]
+a = "code_action" # Maps `ga` to show possible code actions
+
+[keys.normal.backspace]
+y = ":yank-diagnostic"
+backspace = "suspend"
+
+[keys.normal."space".b]
+f = "buffer_picker"
+q = ":buffer-close"
+p = ":buffer-previous"
+n = ":buffer-next"
+
+# Writing: typewriter-style centered scrolling (runtime toggle).
+# `space w c` centers the cursor, `space w n` restores normal scrolling.
+# For the full no-delete freewriting mode, launch `.helix/typewriter.toml`
+# (e.g. `make write FILE=essay`).
+[keys.normal."space".w]
+c = ":set scrolloff 999"
+n = ":set scrolloff 6"
+
+[keys.select]
+"g" = { "e" = "extend_to_file_end" }
+"]" = {f = ["goto_next_function", "flip_selections", "collapse_selection"], F=["goto_next_function", "flip_selections"]}
+"[" = {f = ["goto_prev_function", "collapse_selection"], F=["goto_prev_function", "flip_selections"]}

@@ -1,0 +1,106 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Homework style: question/answer structure, HW headers, title page.
+% Pairs with hw.tex.  Expects these commands to be defined in the main file:
+%   \assignmentClassCode \classTitle \assignmentTitle \assignmentQuestionName
+%   \studentName \studentNumber  (and optionally \studentID, \assignmentDueDate,
+%   \assignmentClassInstructor)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hwstyle}[2026/06/04 Homework style]
+
+\RequirePackage{preamble}
+\RequirePackage{titlesec}            % Restyle \section / \subsection as questions
+
+\setlength\parindent{0pt}           % No paragraph indentation for homeworks
+
+%----------------------------------------------------------------------------------------
+%	HEADERS AND FOOTERS
+%----------------------------------------------------------------------------------------
+\pagestyle{fancy}
+\lhead{\small\assignmentClassCode}
+\chead{\small HW: \# \assignmentTitle}
+\rhead{\small \studentName - \studentNumber}
+\lfoot{}
+\cfoot{\small Page\ \thepage\ of\ \pageref{LastPage}}
+\rfoot{}
+\renewcommand\headrulewidth{0.5pt}
+
+%----------------------------------------------------------------------------------------
+%	SECTION STYLES (questions / subquestions)
+%----------------------------------------------------------------------------------------
+\titleformat
+	{\section}[block]
+	{\Large\bfseries}
+	{\assignmentQuestionName~\thesection}
+	{6pt}{}
+\titlespacing{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip}
+
+\titleformat
+	{\subsection}[block]
+	{\itshape}
+	{(\alph{subsection})}
+	{4pt}{}
+\titlespacing{\subsection}{0pt}{0.5\baselineskip}{0.5\baselineskip}
+\renewcommand\thesubsection{(\alph{subsection})}
+
+%----------------------------------------------------------------------------------------
+%	QUESTION ENVIRONMENTS / COMMANDS
+%----------------------------------------------------------------------------------------
+% Each question in the assignment
+\newenvironment{question}{
+	\vspace{0.5\baselineskip}
+	\section{} % Blank title -> just "Question N"
+	\lfoot{\small\itshape\assignmentQuestionName~\thesection~continued on next page\ldots}
+}{
+	\lfoot{} % Reset if the question does not continue onto the next page
+}
+
+% Subquestion, takes the subquestion name as its argument
+\newenvironment{subquestion}[1]{
+	\subsection{#1}
+}{}
+
+% A bold question prompt
+\newcommand{\questiontext}[1]{
+	\textbf{#1}
+	\vspace{0.5\baselineskip}
+}
+
+% Answer box that breaks across pages.  \solution and \sol are aliases.
+\newcommand{\answer}[1]{
+	\begin{tcolorbox}[breakable, enhanced]
+		#1
+	\end{tcolorbox}
+}
+\let\solution\answer
+\let\sol\answer
+
+% Major-part divider within an assignment
+\newcommand{\assignmentSection}[1]{
+	{
+		\centering
+		\vspace{2\baselineskip}
+		\rule{0.8\textwidth}{0.5pt}
+		\vspace{0.75\baselineskip}
+		{\LARGE \MakeUppercase{#1}}
+		\rule{0.8\textwidth}{0.5pt}
+		\vspace{\baselineskip}
+	}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\author{\textbf{\studentName} - \studentNumber \ifdef{\studentID}{ - \studentID}{}}
+\date{}
+
+\title{
+	\thispagestyle{empty}
+	\textbf{\classTitle}\\
+	\textbf{\assignmentClassCode:\ HW \#\assignmentTitle}\\[-4pt]
+	\ifdef{\assignmentDueDate}{\ifdefempty{\assignmentDueDate}{}{{\small Due\ on\ \assignmentDueDate}\\}}{}
+	\ifdef{\assignmentClassInstructor}{{\large \textit{\assignmentClassInstructor}}}{}
+}
+
+\endinput
