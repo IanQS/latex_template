@@ -1,6 +1,6 @@
 # LaTeX template (homework + essay)
 
-A general-purpose LaTeX template I fork per assignment. It ships two entry
+A general-purpose LaTeX template I fork per assignment/essay. It ships two entry
 files that share a common preamble, so the same repo handles both math-y
 problem sets and simple long-form essays.
 
@@ -45,7 +45,7 @@ make cleanall         # remove aux files and the PDF
 
 ## Writing in Helix
 
-`.helix/config.toml` adds a centered-scrolling toggle (genuine typewriter
+`.helix/typewriter_mode.toml` adds a centered-scrolling toggle (genuine typewriter
 scroll, cursor pinned to the middle of the screen):
 
 - `space w c` — center the cursor
