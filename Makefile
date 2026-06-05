@@ -5,6 +5,7 @@
 #   make FILE=essay      build essay.tex (runs biber for the bibliography)
 #   make watch FILE=...  rebuild continuously as you edit
 #   make write FILE=...  open the file in Helix "typewriter" mode
+#   make wordcount FILE=... prose-aware word count (skips LaTeX markup)
 #   make clean           remove the build/ aux files (keep the PDF)
 #   make cleanall        remove the build/ aux files AND the PDF
 #
@@ -12,7 +13,7 @@
 
 FILE ?= hw
 
-.PHONY: build watch write clean cleanall
+.PHONY: build watch write wordcount clean cleanall
 
 build:
 	latexmk $(FILE).tex
@@ -21,7 +22,7 @@ watch:
 	latexmk -pvc $(FILE).tex
 
 write:
-	hx -c .helix/typewriter.toml $(FILE).tex
+	hx -c .helix/typewriter_mode.toml $(FILE).tex
 
 clean:
 	latexmk -c $(FILE).tex

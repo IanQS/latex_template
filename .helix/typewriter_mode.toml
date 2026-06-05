@@ -1,0 +1,183 @@
+# Helix "typewriter" mode, which forces you to write instead of obsessing over editing
+#
+# It does two things:
+#   1. Pins the cursor to the vertical center of the screen (typewriter scroll).
+#   2. Disables deletion / undo so you are pushed to keep writing forward.
+# Note: this is best-effort, not a hard lock — command mode (:) is still open.
+
+# Based on the helix branch from https://github.com/gj1118/helix, which integrates in
+# a bunch of changes
+theme = "monokai_pro_spectrum"
+
+[editor]
+line-number = "relative"
+mouse = true
+cursorline = true
+true-color = true
+rulers = [80, 120]
+color-modes = true
+completion-timeout = 15
+jump-label-alphabet = "jfkdls;aurieowpqnvmcxz"
+default-yank-register = '+'
+fold-textobjects = ["comment"] # Example: fold all comments on open
+end-of-line-diagnostics="error"
+scrolloff = 999          # TYPEWRITER: cursor stays centered; the page scrolls under it
+
+[editor.soft-wrap]
+enable = true            # wrap long prose lines instead of scrolling sideways
+
+# --- Insert mode: no deleting ---
+[keys.insert]
+"C-[" = "normal_mode"    # keep a familiar escape
+backspace = "no_op"      # no delete-backward
+del = "no_op"            # no delete-forward
+C-w = "no_op"            # no delete-word-backward
+C-u = "no_op"            # no kill-to-line-start
+
+# --- Normal mode: no undo / structural deletes ---
+[keys.normal]
+u = "no_op"              # no undo
+U = "no_op"              # no redo
+d = "no_op"              # no delete-selection
+c = "no_op"              # no change-selection
+r = "no_op"              # no replace-char
+R = "no_op"              # no replace-with-yanked
+
+
+[editor.bufferline]
+render-mode = "multiple"
+separator = "|"
+
+[editor.inline-diagnostics]
+cursor-line = "disable"
+other-lines = "disable"
+max-diagnostics = 2
+
+[editor.cmdline]
+# Command line style: "bottom" (default) or "popup" (noice.nvim style)
+style = "popup"
+min-popup-width = 80
+show-icons = false
+
+[editor.notifications]
+enable = true              # Enable notification system
+style = "popup"            # "popup" (noice-style) or "statusline" (traditional)
+position = "top-right"     # Position: "top-right", "top-left", "bottom-right", "bottom-left"
+max-width = 60             # Maximum width for notification popups
+max-height = 10            # Maximum height for notification popups
+default-timeout = 2000     # Default timeout in milliseconds (0 = no timeout)
+show-icons = true          # Show notification type icons
+# show-emojis = true         # Show notification type emojis
+max-history = 100          # Maximum notifications to keep in history
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "function-name"]
+right = ["diagnostics", "separator", "workspace-diagnostics", "selections", "position"]
+separator = "│"
+mode.normal = "TYPEWRITER - NOR"
+mode.insert = "TYPEWRITER - INS"
+mode.select = "TYPEWRITER - SEL"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+render = true
+
+[editor.soft-wrap]
+enable = true
+
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+
+# Of course, you could have it reload on focus and at an interval too:
+[editor.auto-reload]
+focus-gained = true
+periodic.enable = true
+periodic.interval = 500
+
+[editor.lsp]
+# Disable automatically popups of signature parameter help
+auto-signature-help = false
+# Show LSP messages in the status line
+display-messages = true
+display-inlay-hints = true
+display-progress-messages = true
+
+[editor.smart-tab]
+supersede-menu = true
+#####################################
+# Keys
+[keys.insert]
+"C-[" = "normal_mode"
+C-h = "signature_help"
+#---------------------------------------
+# TYPEWRITER stuff
+backspace = "no_op"      # no delete-backward
+del = "no_op"            # no delete-forward
+C-w = "no_op"            # no delete-word-backward
+C-u = "no_op"            # no kill-to-line-start
+#---------------------------------------
+
+
+[keys.normal]
+- = "@zt k"
+# "C-p" = "@:lsp-workspace-command "
+"C-p" = "@:sh "
+"C-r" = "@:rl"
+"ret" = "goto_word"
+C-j     = "page_down"
+C-k     = ["page_up", "goto_window_top"]
+"]" = {f = ["goto_next_function", "flip_selections", "collapse_selection"], F=["goto_next_function", "flip_selections"]}
+"[" = {f = ["goto_prev_function", "collapse_selection"], F=["goto_prev_function", "flip_selections"]}
+
+C-y = [
+  ':sh rm -f /tmp/unique-file',
+  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
+  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':open %sh{cat /tmp/unique-file}',
+  ':redraw',
+]
+C-g = [
+    ":write-all",
+    ":new",
+    ":insert-output lazygit",
+    ":buffer-close!",
+    ":redraw",
+    ":reload-all"
+]
+
+#---------------------------------------
+# TYPEWRITER stuff
+u = "no_op"              # no undo
+U = "no_op"              # no redo
+d = "no_op"              # no delete-selection
+c = "no_op"              # no change-selection
+r = "no_op"              # no replace-char
+R = "no_op"              # no replace-with-yanked
+#---------------------------------------
+
+
+[keys.normal.g]
+a = "code_action" # Maps `ga` to show possible code actions
+
+[keys.normal.backspace]
+y = ":yank-diagnostic"
+backspace = "suspend"
+
+[keys.normal."space".b]
+f = "buffer_picker"
+q = ":buffer-close"
+p = ":buffer-previous"
+n = ":buffer-next"
+
+[keys.select]
+"g" = { "e" = "extend_to_file_end" }
+"]" = {f = ["goto_next_function", "flip_selections", "collapse_selection"], F=["goto_next_function", "flip_selections"]}
+"[" = {f = ["goto_prev_function", "collapse_selection"], F=["goto_prev_function", "flip_selections"]}
