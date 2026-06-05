@@ -11,11 +11,11 @@
 \ProvidesPackage{preamble}[2026/06/04 Shared preamble for homework/essay templates]
 
 %----------------------------------------------------------------------------------------
-%	ENCODING & FONT
+%	FONT  (LuaLaTeX)
 %----------------------------------------------------------------------------------------
-\RequirePackage[utf8]{inputenc}      % Input international characters (pdfLaTeX)
-\RequirePackage[T1]{fontenc}         % Output font encoding for those characters
-\RequirePackage[sfdefault,light]{roboto} % Roboto as the default font
+% LuaLaTeX is UTF-8 native and uses fontspec, so inputenc/fontenc are NOT needed.
+% The roboto package detects the engine and loads Roboto through fontspec for us.
+\RequirePackage[sfdefault,light]{roboto} % Roboto as the default font (via fontspec)
 
 %----------------------------------------------------------------------------------------
 %	MARGINS

@@ -1,0 +1,24 @@
+# Project-local Helix overrides for THIS template.
+# Helix merges this over your global ~/.config/helix/languages.toml, so it only
+# needs the bits specific to this repo -- the latex language + servers are defined
+# globally; here we just turn on texlab's build + forward/inverse search.
+#
+# Engine (LuaLaTeX), synctex, shell-escape and the aux dir all come from this
+# repo's .latexmkrc, so we don't repeat them here.
+#
+# Battery note: onSave rebuilds on every save. On a laptop, set onSave = false and
+# trigger builds manually instead.
+
+[language-server.texlab.config.texlab.build]
+executable = "latexmk"
+# No -pdf here: that would force pdfLaTeX. .latexmkrc selects LuaLaTeX.
+# -outdir=build keeps the editor's throwaway PDF next to its aux files; the
+# committed PDF from `make` still lands at the repo top level.
+args = ["-outdir=build", "-interaction=nonstopmode", "%f"]
+auxDirectory = "build"
+onSave = true
+forwardSearchAfter = true
+
+[language-server.texlab.config.texlab.forwardSearch]
+executable = "zathura"
+args = ["--synctex-forward", "%l:%f", "./build/%p"]

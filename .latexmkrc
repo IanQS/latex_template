@@ -1,7 +1,7 @@
 # latexmk configuration, picked up automatically by `make` and bare `latexmk`.
 
-$pdf_mode = 1;  # build a PDF with pdflatex
-$pdflatex = 'pdflatex -shell-escape -synctex=1 '
+$pdf_mode = 4;  # build a PDF with LuaLaTeX
+$lualatex = 'lualatex -shell-escape -synctex=1 '
           . '-interaction=nonstopmode -file-line-error %O %S';
 
 # Keep auxiliary files (.aux/.log/.bbl/...) out of sight in build/,
