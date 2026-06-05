@@ -67,14 +67,14 @@
 	\vspace{0.5\baselineskip}
 }
 
-% Answer box that breaks across pages.  \solution and \sol are aliases.
-\newcommand{\answer}[1]{
-	\begin{tcolorbox}[breakable, enhanced]
-		#1
-	\end{tcolorbox}
-}
-\let\solution\answer
-\let\sol\answer
+% Answer box that breaks across pages.  Defined as an ENVIRONMENT (not a command)
+% so verbatim / \verb / lstlisting / minted work inside it -- a macro argument
+% would freeze catcodes and make verbatim "illegal in argument".
+%   \begin{answer} ... \end{answer}
+% solution / sol are aliases for the same environment.
+\newtcolorbox{answer}{breakable, enhanced}
+\let\solution\answer   \let\endsolution\endanswer
+\let\sol\answer        \let\endsol\endanswer
 
 % Major-part divider within an assignment
 \newcommand{\assignmentSection}[1]{

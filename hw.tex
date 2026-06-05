@@ -4,6 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[11pt]{article}
+%\newcommand{\finaldoc}{}   % Uncomment for the submission build (hides \todo notes)
 \usepackage{hwstyle}
 
 %----------------------------------------------------------------------------------------
@@ -39,9 +40,17 @@
 \questiontext{Main Question}
 
 \begin{subquestion}{Sub-question 1}
-\answer{
-
-}
+\begin{answer}
+	The answer box is now an environment, so code and verbatim work inside it:
+	\begin{lstlisting}[language=Python]
+def converges(seq):
+    return is_bounded(seq) and is_monotonic(seq)
+	\end{lstlisting}
+	Theorem-like environments work too, e.g.
+	\begin{theorem}
+		Every bounded monotonic sequence converges.
+	\end{theorem}
+\end{answer}
 \end{subquestion}
 \end{question}
 
@@ -56,17 +65,20 @@
 		\toprule
 		\textit{Per 50g} & Pork & Soy \\
 		\midrule
-		Energy & 760kJ & 538kJ\\
-		Protein & 7.0g & 9.3g\\
-		Carbohydrate & 0.0g & 4.9g\\
-		Fat & 16.8g & 9.1g\\
-		Sodium & 0.4g & 0.4g\\
-		Fibre & 0.0g & 1.4g\\
+		Energy & \qty{760}{\kilo\joule} & \qty{538}{\kilo\joule}\\
+		Protein & \qty{7.0}{\gram} & \qty{9.3}{\gram}\\
+		Carbohydrate & \qty{0.0}{\gram} & \qty{4.9}{\gram}\\
+		Fat & \qty{16.8}{\gram} & \qty{9.1}{\gram}\\
+		Sodium & \qty{0.4}{\gram} & \qty{0.4}{\gram}\\
+		Fibre & \qty{0.0}{\gram} & \qty{1.4}{\gram}\\
 		\bottomrule
 	\end{tabular}
+	\caption{Nutrition per \qty{50}{\gram}.}\label{tab:nutrition}
 \end{table}
 
-\answer{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor arcu luctus, imperdiet urna iaculis, mattis eros. Pellentesque iaculis odio vel nisl ullamcorper, nec faucibus ipsum molestie.}
+\begin{answer}
+As \cref{tab:nutrition} shows, units come from \texttt{siunitx} via \verb|\qty{7.0}{\gram}|, so spacing and formatting stay consistent. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+\end{answer}
 
 \end{question}
 
@@ -75,15 +87,19 @@
 %----------------------------------------------------------------------------------------
 \begin{question}
 
-\includegraphics[width=0.9\textwidth]{q2_input_current.png}
+\addfigure[0.9\textwidth]{q2_input_current.png}{Measured input current.}{fig:input}
 
-Begin with model definition
-$$\frac{dV}{dt} = \frac{-V}{RC} + \frac{I}{C}$$
+\Cref{fig:input} shows the input. Begin with the model definition,
+\begin{equation}\label{eq:ode}
+	\frac{dV}{dt} = -\frac{V}{RC} + \frac{I}{C}.
+\end{equation}
+Separating variables in \cref{eq:ode} and integrating,
 \begin{align*}
-	\frac{dV}{V - IR} &= \frac{-dt}{RC}\\
-	\text{Some magic and prayers}\\
-	V &= 0.6321 * IR
+	\frac{dV}{V - IR} &= -\frac{dt}{RC}\\
+	&\;\;\vdots\\
+	V &= 0.6321\,IR.
 \end{align*}
+\todo{double-check the time constant}
 
 \end{question}
 
