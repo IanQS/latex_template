@@ -1,0 +1,41 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Essay style: simple long-form layout with running headers and a bibliography.
+% Pairs with essay.tex.  Expects these commands in the main file:
+%   \essayTitle \essayAuthor \essayDate  (and optionally \essaySubtitle)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{essaystyle}[2026/06/04 Essay style]
+
+\RequirePackage{preamble}
+\RequirePackage{setspace}            % \onehalfspacing / \doublespacing if wanted
+\RequirePackage{csquotes}            % Context-sensitive quotes (load before biblatex)
+\RequirePackage[backend=biber,style=numeric-comp,sorting=nyt]{biblatex}
+\addbibresource{references.bib}      % Your .bib file
+
+% Uncomment for wider line spacing (common for submitted essays):
+%\onehalfspacing
+
+%----------------------------------------------------------------------------------------
+%	HEADERS AND FOOTERS
+%----------------------------------------------------------------------------------------
+\pagestyle{fancy}
+\lhead{\small\essayAuthor}
+\chead{}
+\rhead{\small\itshape\essayTitle}
+\lfoot{}
+\cfoot{\small\thepage}
+\rfoot{}
+\renewcommand\headrulewidth{0.5pt}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+\title{
+	\textbf{\essayTitle}%
+	\ifdef{\essaySubtitle}{\ifdefempty{\essaySubtitle}{}{\\[4pt]{\large\itshape \essaySubtitle}}}{}
+}
+\author{\essayAuthor}
+\date{\essayDate}
+
+\endinput

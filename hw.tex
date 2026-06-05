@@ -1,0 +1,106 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Homework entry file.  Build with:  make            (or  make FILE=hw)
+% Structure & commands live in hwstyle.sty / preamble.sty
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+%\newcommand{\finaldoc}{}   % Uncomment for the submission build (hides \todo notes)
+\usepackage{hwstyle}
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+% Required
+\newcommand{\assignmentClassCode}{CLASS-CODE}
+\newcommand{\classTitle}{CLASS-NAME}
+\newcommand{\assignmentTitle}{X}                 % Assignment number/name
+\newcommand{\assignmentQuestionName}{Question}   % Prefix for sections: Question, Problem, ...
+
+% You
+\newcommand{\studentName}{Ian Quah}
+\newcommand{\studentNumber}{2330981}
+
+% Optional (leave empty or delete the line to omit)
+\newcommand{\assignmentDueDate}{}
+\newcommand{\studentID}{itq}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 1
+%----------------------------------------------------------------------------------------
+\begin{question}
+
+\questiontext{Main Question}
+
+\begin{subquestion}{Sub-question 1}
+\begin{answer}
+	The answer box is now an environment, so code and verbatim work inside it:
+	\begin{lstlisting}[language=Python]
+def converges(seq):
+    return is_bounded(seq) and is_monotonic(seq)
+	\end{lstlisting}
+	Theorem-like environments work too, e.g.
+	\begin{theorem}
+		Every bounded monotonic sequence converges.
+	\end{theorem}
+\end{answer}
+\end{subquestion}
+\end{question}
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 2 -- a table
+%----------------------------------------------------------------------------------------
+\begin{question}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l l l}
+		\toprule
+		\textit{Per 50g} & Pork & Soy \\
+		\midrule
+		Energy & \qty{760}{\kilo\joule} & \qty{538}{\kilo\joule}\\
+		Protein & \qty{7.0}{\gram} & \qty{9.3}{\gram}\\
+		Carbohydrate & \qty{0.0}{\gram} & \qty{4.9}{\gram}\\
+		Fat & \qty{16.8}{\gram} & \qty{9.1}{\gram}\\
+		Sodium & \qty{0.4}{\gram} & \qty{0.4}{\gram}\\
+		Fibre & \qty{0.0}{\gram} & \qty{1.4}{\gram}\\
+		\bottomrule
+	\end{tabular}
+	\caption{Nutrition per \qty{50}{\gram}.}\label{tab:nutrition}
+\end{table}
+
+\begin{answer}
+As \cref{tab:nutrition} shows, units come from \texttt{siunitx} via \verb|\qty{7.0}{\gram}|, so spacing and formatting stay consistent. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+\end{answer}
+
+\end{question}
+
+%----------------------------------------------------------------------------------------
+%	QUESTION 3 -- an image and some math
+%----------------------------------------------------------------------------------------
+\begin{question}
+
+\addfigure[0.9\textwidth]{q2_input_current.png}{Measured input current.}{fig:input}
+
+\Cref{fig:input} shows the input. Begin with the model definition,
+\begin{equation}\label{eq:ode}
+	\frac{dV}{dt} = -\frac{V}{RC} + \frac{I}{C}.
+\end{equation}
+Separating variables in \cref{eq:ode} and integrating,
+\begin{align*}
+	\frac{dV}{V - IR} &= -\frac{dt}{RC}\\
+	&\;\;\vdots\\
+	V &= 0.6321\,IR.
+\end{align*}
+\todo{double-check the time constant}
+
+\end{question}
+
+\end{document}

@@ -1,0 +1,138 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Shared preamble for the homework / essay templates.
+% Anything common to BOTH document types lives here.
+% Homework-only bits -> hwstyle.sty,  essay-only bits -> essaystyle.sty
+%
+% Original homework template: latextemplates.com/template/cleese-assignment
+% License: CC BY-NC-SA 3.0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{preamble}[2026/06/04 Shared preamble for homework/essay templates]
+
+%----------------------------------------------------------------------------------------
+%	ENCODING & FONT
+%----------------------------------------------------------------------------------------
+\RequirePackage[utf8]{inputenc}      % Input international characters (pdfLaTeX)
+\RequirePackage[T1]{fontenc}         % Output font encoding for those characters
+\RequirePackage[sfdefault,light]{roboto} % Roboto as the default font
+
+%----------------------------------------------------------------------------------------
+%	MARGINS
+%----------------------------------------------------------------------------------------
+\RequirePackage{geometry}
+\geometry{
+	paper=a4paper,   % Change to letterpaper for US letter
+	top=3cm,
+	bottom=3cm,
+	left=2.5cm,
+	right=2.5cm,
+	headheight=14pt,
+	footskip=1.4cm,
+	headsep=1.2cm,
+	%showframe,      % Uncomment to see the type block on the page
+}
+
+%----------------------------------------------------------------------------------------
+%	MATH  (available in both homeworks and essays)
+%----------------------------------------------------------------------------------------
+\RequirePackage{mathtools}           % amsmath superset: \coloneqq, better spacing, ...
+\RequirePackage{amssymb}             % \mathbb, \mathcal, extra symbols
+\RequirePackage{amsthm}              % theorem-like environments
+\RequirePackage{siunitx}             % numbers & units: \qty{7.0}{\gram}, \unit{\kilo\joule}
+
+% Theorem-like environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}         % unnumbered
+
+% Delimiters that grow with their contents: \abs{x}, \norm{v}, \ceil{x}, \floor{x}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+%----------------------------------------------------------------------------------------
+%	TABLES, FIGURES, LISTS
+%----------------------------------------------------------------------------------------
+\RequirePackage{graphicx}            % Insert images
+\RequirePackage{booktabs}            % Nicer horizontal rules in tables
+\RequirePackage{caption}             % Captions outside floats / better caption control
+\RequirePackage{subcaption}          % Sub-figures: \begin{subfigure}...
+\RequirePackage{enumitem}            % Customizable / tighter lists
+
+%----------------------------------------------------------------------------------------
+%	CODE LISTINGS (styled)
+%----------------------------------------------------------------------------------------
+\RequirePackage{xcolor}
+\RequirePackage{listings}
+\definecolor{lstbg}{gray}{0.97}
+\definecolor{lstkw}{rgb}{0.13,0.29,0.53}
+\definecolor{lstcomment}{rgb}{0.00,0.50,0.00}
+\definecolor{lststring}{rgb}{0.58,0.00,0.34}
+\definecolor{lstnum}{gray}{0.50}
+\lstset{
+	backgroundcolor=\color{lstbg},
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{lstkw}\bfseries,
+	commentstyle=\itshape\color{lstcomment},
+	stringstyle=\color{lststring},
+	numbers=left, numberstyle=\tiny\color{lstnum}, numbersep=8pt,
+	frame=single, rulecolor=\color{lstnum!40},
+	breaklines=true, breakatwhitespace=true,
+	showstringspaces=false, tabsize=2,
+	captionpos=b, xleftmargin=14pt,
+}
+
+%----------------------------------------------------------------------------------------
+%	BOXES, HEADERS, UTILITIES
+%----------------------------------------------------------------------------------------
+\RequirePackage{etoolbox}            % \ifdef / \ifdefempty / \AtEndPreamble
+\RequirePackage{lastpage}            % "page X of Y" support
+\RequirePackage[most]{tcolorbox}     % Boxes that break across pages
+\RequirePackage{fancyhdr}            % Custom headers/footers (configured per style)
+\RequirePackage{microtype}           % Subtle kerning/justification -> more polished text
+
+%----------------------------------------------------------------------------------------
+%	DRAFTING NOTES
+%	\todo{...} margin notes while drafting. They are hidden automatically if the
+%	entry file defines \finaldoc (i.e. \newcommand{\finaldoc}{}) before loading a style.
+%----------------------------------------------------------------------------------------
+\setlength{\marginparwidth}{2cm}
+\ifdefined\finaldoc
+	\RequirePackage[disable]{todonotes}
+\else
+	\RequirePackage[colorinlistoftodos,textsize=footnotesize]{todonotes}
+\fi
+
+%----------------------------------------------------------------------------------------
+%	LINKS & SMART CROSS-REFERENCES  (must be loaded last)
+%----------------------------------------------------------------------------------------
+\RequirePackage[hidelinks]{hyperref} % Clickable refs/links without colored boxes
+% cleveref must come after hyperref AND after biblatex (loaded later by essaystyle),
+% so defer it to the very end of the preamble.  Use \cref{fig:x} -> "figure 1", etc.
+\AtEndPreamble{\RequirePackage[nameinlink]{cleveref}}
+
+%----------------------------------------------------------------------------------------
+%	SHARED HELPERS
+%----------------------------------------------------------------------------------------
+\graphicspath{{./images/}}           % Look for figures in ./images
+\newcommand{\codeword}{\texttt}      % Inline code: \codeword{foo}
+
+% \addfigure[width]{file}{caption}{label}  -- captioned, labelled, centered figure
+\newcommand{\addfigure}[4][0.9\textwidth]{%
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[width=#1]{#2}
+		\caption{#3}\label{#4}
+	\end{figure}%
+}
+
+\endinput

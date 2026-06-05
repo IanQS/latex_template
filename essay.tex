@@ -1,0 +1,44 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Essay entry file.  Build with:  make FILE=essay
+% Layout lives in essaystyle.sty / preamble.sty;  citations in references.bib
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+%\newcommand{\finaldoc}{}   % Uncomment for the submission build (hides \todo notes)
+\usepackage{essaystyle}
+
+%----------------------------------------------------------------------------------------
+%	ESSAY INFORMATION
+%----------------------------------------------------------------------------------------
+\newcommand{\essayTitle}{An Essay Title}
+\newcommand{\essaySubtitle}{An optional subtitle} % Leave empty or delete to omit
+\newcommand{\essayAuthor}{Ian Quah}
+\newcommand{\essayDate}{\today}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+Open with the thesis. Cite sources inline like this~\parencite{knuth1984texbook},
+or footnote-style with \autocite{lamport1994latex}. Paragraphs are indented in the
+traditional essay style; start a new one with a blank line.
+
+\section{First point}
+
+Develop the argument here. Quotes go through \texttt{csquotes}: \enquote{like so},
+which adapts to the document language automatically. Math works in essays too, e.g.
+\begin{equation}\label{eq:key}
+	E = mc^2 .
+\end{equation}
+As \cref{eq:key} suggests, mass and energy are interchangeable.
+\todo{tie this back to the thesis}
+
+\section{Conclusion}
+
+Restate and close.
+
+\printbibliography
+
+\end{document}

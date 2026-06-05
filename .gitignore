@@ -1,3 +1,6 @@
+## latexmk aux/build directory (see .latexmkrc) — the PDF stays at the top level
+/build/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
