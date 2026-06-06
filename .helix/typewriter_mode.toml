@@ -26,24 +26,6 @@ scrolloff = 999          # TYPEWRITER: cursor stays centered; the page scrolls u
 [editor.soft-wrap]
 enable = true            # wrap long prose lines instead of scrolling sideways
 
-# --- Insert mode: no deleting ---
-[keys.insert]
-"C-[" = "normal_mode"    # keep a familiar escape
-backspace = "no_op"      # no delete-backward
-del = "no_op"            # no delete-forward
-C-w = "no_op"            # no delete-word-backward
-C-u = "no_op"            # no kill-to-line-start
-
-# --- Normal mode: no undo / structural deletes ---
-[keys.normal]
-u = "no_op"              # no undo
-U = "no_op"              # no redo
-d = "no_op"              # no delete-selection
-c = "no_op"              # no change-selection
-r = "no_op"              # no replace-char
-R = "no_op"              # no replace-with-yanked
-
-
 [editor.bufferline]
 render-mode = "multiple"
 separator = "|"
