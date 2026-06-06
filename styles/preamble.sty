@@ -113,6 +113,15 @@
 \fi
 
 %----------------------------------------------------------------------------------------
+%	DOCUMENT SPLITTING
+%	Split a long assignment/essay into one file per question under parts/, each a
+%	subfile of the master (hw.tex / essay.tex).  `make new Q=N` scaffolds and links
+%	them.  Handy when your editor lacks code folding: each problem is its own file.
+%	A part compiles standalone (fast drafting) and as part of the master (final PDF).
+%----------------------------------------------------------------------------------------
+\RequirePackage{subfiles}            % \subfile{parts/qN}, \ifSubfilesClassLoaded{...}{...}
+
+%----------------------------------------------------------------------------------------
 %	LINKS & SMART CROSS-REFERENCES  (must be loaded last)
 %----------------------------------------------------------------------------------------
 \RequirePackage[hidelinks]{hyperref} % Clickable refs/links without colored boxes

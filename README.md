@@ -7,14 +7,17 @@ problem sets and simple long-form essays.
 ```
 hw.tex           homework entry file   -> \usepackage{hwstyle}
 essay.tex        essay entry file      -> \usepackage{essaystyle}
+parts/           optional: one file per question when you split a document
+  _question.tex  hw skeleton copied by `make new`
+  _section.tex   essay skeleton copied by `make new`
 references.bib   bibliography database for essays
 styles/
-  preamble.sty   shared: packages, Roboto font, margins, math, links
+  preamble.sty   shared: packages, Roboto font, margins, subfiles, math, links
   hwstyle.sty    homework: question/answer environments, HW headers, title page
   essaystyle.sty essay: running headers, bibliography (biblatex/biber)
 images/          figures (\graphicspath points here)
-build/           auxiliary files (.aux/.log/.bbl/...) — git-ignored, auto-cleaned
-Makefile         build/clean/watch wrappers
+build/           auxiliary files (.aux/.log/.bbl/.bcf/...) — git-ignored, auto-cleaned
+Makefile         build/new/clean/watch wrappers
 .latexmkrc       latexmk config: aux -> build/, PDF at top level, styles/ on path
 .helix/          editor config + typewriter writing mode
 ```
@@ -37,11 +40,33 @@ which handles reruns and runs `biber` for the essay bibliography automatically.
 make                  # build hw.tex (default)
 make FILE=essay       # build essay.tex
 make watch FILE=essay # rebuild on every save
+make wordcount FILE=essay  # prose-aware word count
 make clean            # remove aux files, keep the PDF
 make cleanall         # remove aux files and the PDF
 ```
 
-`FILE` is the entry-file name without `.tex`.
+`FILE` is the entry-file name without `.tex` (e.g. `hw`, `essay`, `parts/q1`).
+
+## Splitting a document into per-question files
+
+Long assignments — especially computational ones with big code blocks — get hard
+to navigate in an editor without code folding. You can split the master into one
+file per question under `parts/`, each a [`subfile`](https://ctan.org/pkg/subfiles)
+of `hw.tex` / `essay.tex`:
+
+```sh
+make new Q=1            # homework: scaffold parts/q1.tex (a question{} block) + link it
+make new Q=1 FILE=essay # essay: scaffold parts/q1.tex (a section{}) + link it
+make                   # build the whole master -> one PDF (all parts included)
+make FILE=parts/q1     # build ONE part on its own (fast, focused drafting)
+make all               # build every part standalone
+```
+
+`make new` picks the hw or essay skeleton automatically from the master's style,
+copies it to `parts/qN.tex`, and inserts a `\subfile{parts/qN}` line between the
+`% PARTS-START` / `% PARTS-END` markers in the master. Each part compiles both
+standalone *and* as part of the master (the shared preamble and `references.bib`
+come from the master), so citations and cross-references work in both modes.
 
 ## Writing in Helix
 
