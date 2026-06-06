@@ -1,0 +1,16 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Essay section — a subfile of MASTER.tex (linked in by `make new`).
+%   Whole essay:  make FILE=MASTER
+%   Just this part:  make FILE=parts/qQNUM
+% No preamble here — it is inherited from MASTER.tex / essaystyle.sty.
+% The master path is relative to the repo root because `make` compiles there.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[MASTER.tex]{subfiles}
+
+\begin{document}
+
+\section{...}
+
+\ifSubfilesClassLoaded{\printbibliography}{} % prints only when drafting this file alone
+
+\end{document}

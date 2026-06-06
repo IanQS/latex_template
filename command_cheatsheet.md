@@ -26,6 +26,19 @@ optional `\studentID`, `\assignmentDueDate`, `\assignmentClassInstructor`.
 Set near the top of `essay.tex`: `\essayTitle`, `\essayAuthor`, `\essayDate`,
 and optional `\essaySubtitle`. Then `\maketitle` prints the heading.
 
+## Splitting into per-question files (subfiles)
+
+| Command / step                                | What it does                                              |
+| --------------------------------------------- | --------------------------------------------------------- |
+| `make new Q=1` / `make new Q=1 FILE=essay`    | Scaffold `parts/q1.tex` (hw `question{}` or essay `section{}`) and link it into the master |
+| `\subfile{parts/q1}` (in the master)          | Pulls a part into the master build (inserted for you by `make new`) |
+| `\documentclass[hw.tex]{subfiles}`            | First line of a part — names its master (relative to the repo root) |
+| `\ifSubfilesClassLoaded{...}{...}`            | Run code only when the part is built standalone (e.g. `\printbibliography`) |
+| `make FILE=parts/q1`                          | Build one part on its own; `make` builds the whole master |
+
+Each part compiles both standalone and inside the master. Useful when your editor
+lacks code folding: keep one problem (and its code) per file.
+
 ---
 
 ## Math (mathtools, amssymb, amsthm)
