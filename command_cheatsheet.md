@@ -33,11 +33,12 @@ and optional `\essaySubtitle`. Then `\maketitle` prints the heading.
 | `make new Q=1` / `make new Q=1 FILE=essay`    | Scaffold `parts/q1.tex` (hw `question{}` or essay `section{}`) and link it into the master |
 | `\subfile{parts/q1}` (in the master)          | Pulls a part into the master build (inserted for you by `make new`) |
 | `\documentclass[hw.tex]{subfiles}`            | First line of a part — names its master (relative to the repo root) |
-| `\ifSubfilesClassLoaded{...}{...}`            | Run code only when the part is built standalone (e.g. `\printbibliography`) |
-| `make FILE=parts/q1`                          | Build one part on its own; `make` builds the whole master |
+| `\ifSubfilesClassLoaded{...}{...}`            | Run code only when a part is previewed on its own (e.g. `\printbibliography`) |
+| comment out a `\subfile{}` line               | Drop that question from the build; `make` builds the whole master |
 
-Each part compiles both standalone and inside the master. Useful when your editor
-lacks code folding: keep one problem (and its code) per file.
+Split a long document into one file per question — handy when your editor lacks
+code folding. You build the whole master with `make`; to build a subset, comment
+out the `\subfile{}` lines you don't want.
 
 ---
 

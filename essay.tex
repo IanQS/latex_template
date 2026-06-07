@@ -6,6 +6,11 @@
 \documentclass[11pt]{article}
 %\newcommand{\finaldoc}{}   % Uncomment for the submission build (hides \todo notes)
 \usepackage{essaystyle}
+% biblatex + \addbibresource also live in essaystyle.sty, but texlab only
+% discovers the bibliography (for \cite{} completion) from a directive it parses
+% directly -- it does not follow \usepackage into styles/*.sty. Declaring it here
+% too is harmless: biber dedupes the data source.
+\addbibresource{references.bib}
 
 %----------------------------------------------------------------------------------------
 %	ESSAY INFORMATION
@@ -41,8 +46,8 @@ Restate and close.
 
 % --- Split mode (optional) -------------------------------------------------
 % Prefer one file per section? Run `make new Q=1 FILE=essay`: it creates
-% parts/qN.tex and links it between the markers below. Delete the example
-% sections above once you switch.
+% parts/qN.tex and links it between the markers below. To build only some
+% sections, comment out the \subfile{} lines you don't want.
 % PARTS-START
 % PARTS-END
 
