@@ -5,7 +5,7 @@
 #   make FILE=essay      build essay.tex (runs biber for the bibliography)
 #   make new Q=1         split out one question into parts/q1.tex and link it
 #                        into the master (FILE); picks a hw or essay skeleton
-#   make all             build every split part (parts/q*.tex) standalone
+#                        (build a subset by commenting out \subfile{} lines)
 #   make watch FILE=...  rebuild continuously as you edit
 #   make write FILE=...  open the file in Helix "typewriter" mode
 #   make wordcount FILE=... prose-aware word count (skips LaTeX markup)
@@ -15,9 +15,8 @@
 # FILE is the entry-file name without the .tex extension (default: hw).
 
 FILE ?= hw
-PARTS := $(wildcard parts/q*.tex)
 
-.PHONY: build new all watch write wordcount clean cleanall
+.PHONY: build new watch write wordcount clean cleanall
 
 build:
 	latexmk $(FILE).tex
@@ -30,10 +29,6 @@ new:
 		sed "s/QNUM/$(Q)/g; s/MASTER/$(FILE)/g" $$tpl > parts/q$(Q).tex
 	@awk '/% PARTS-END/{print "\\subfile{parts/q$(Q)}"; print; next} {print}' $(FILE).tex > $(FILE).tex.tmp && mv $(FILE).tex.tmp $(FILE).tex
 	@echo "created parts/q$(Q).tex and linked it into $(FILE).tex"
-
-all:
-	@test -n "$(PARTS)" || { echo "no parts/q*.tex yet — run: make new Q=1"; exit 1; }
-	@for f in $(PARTS); do echo "=== $$f ==="; latexmk "$$f"; done
 
 watch:
 	latexmk -pvc $(FILE).tex

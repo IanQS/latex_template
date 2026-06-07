@@ -117,7 +117,7 @@
 %	Split a long assignment/essay into one file per question under parts/, each a
 %	subfile of the master (hw.tex / essay.tex).  `make new Q=N` scaffolds and links
 %	them.  Handy when your editor lacks code folding: each problem is its own file.
-%	A part compiles standalone (fast drafting) and as part of the master (final PDF).
+%	To build a subset, comment out the \subfile{} lines you don't want in the master.
 %----------------------------------------------------------------------------------------
 \RequirePackage{subfiles}            % \subfile{parts/qN}, \ifSubfilesClassLoaded{...}{...}
 

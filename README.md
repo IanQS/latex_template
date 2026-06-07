@@ -45,7 +45,7 @@ make clean            # remove aux files, keep the PDF
 make cleanall         # remove aux files and the PDF
 ```
 
-`FILE` is the entry-file name without `.tex` (e.g. `hw`, `essay`, `parts/q1`).
+`FILE` is the entry-file name without `.tex` (e.g. `hw`, `essay`).
 
 ## Splitting a document into per-question files
 
@@ -58,15 +58,14 @@ of `hw.tex` / `essay.tex`:
 make new Q=1            # homework: scaffold parts/q1.tex (a question{} block) + link it
 make new Q=1 FILE=essay # essay: scaffold parts/q1.tex (a section{}) + link it
 make                   # build the whole master -> one PDF (all parts included)
-make FILE=parts/q1     # build ONE part on its own (fast, focused drafting)
-make all               # build every part standalone
 ```
 
 `make new` picks the hw or essay skeleton automatically from the master's style,
 copies it to `parts/qN.tex`, and inserts a `\subfile{parts/qN}` line between the
-`% PARTS-START` / `% PARTS-END` markers in the master. Each part compiles both
-standalone *and* as part of the master (the shared preamble and `references.bib`
-come from the master), so citations and cross-references work in both modes.
+`% PARTS-START` / `% PARTS-END` markers in the master. You always build the whole
+master with `make`; to build only some questions, comment out the `\subfile{}`
+lines you don't want. The shared preamble and `references.bib` come from the
+master, so citations and cross-references resolve.
 
 ## Writing in Helix
 

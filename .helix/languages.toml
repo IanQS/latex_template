@@ -9,13 +9,26 @@
 # Battery note: onSave rebuilds on every save. On a laptop, set onSave = false and
 # trigger builds manually instead.
 
+# Let texlab resolve \usepackage{hwstyle}/{essaystyle} from styles/ (off the default
+# search path), mirroring .latexmkrc. NOTE: this does NOT make texlab find the
+# bibliography -- it won't follow \usepackage into a .sty, so \cite{} completion needs
+# \addbibresource{references.bib} in the entry .tex itself (see essay.tex).
+[language-server.texlab.environment]
+TEXINPUTS = ".:styles:"
+BIBINPUTS = ".:"
+
+# auxDirectory is a TOP-LEVEL texlab key, not a child of `build`; nesting it under
+# build makes texlab ignore it and assume aux/PDF sit at the repo root.
+[language-server.texlab.config.texlab]
+auxDirectory = "build"
+
 [language-server.texlab.config.texlab.build]
 executable = "latexmk"
 # No -pdf here: that would force pdfLaTeX. .latexmkrc selects LuaLaTeX.
 # -outdir=build keeps the editor's throwaway PDF next to its aux files; the
 # committed PDF from `make` still lands at the repo top level.
 args = ["-outdir=build", "-interaction=nonstopmode", "%f"]
-auxDirectory = "build"
+pdfDirectory = "build"
 onSave = true
 forwardSearchAfter = true
 
