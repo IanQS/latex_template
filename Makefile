@@ -1,5 +1,6 @@
-# LaTeX template Makefile. Build settings live in .latexmkrc (aux -> build/,
-# PDF stays at top level, styles/ on the search path).
+# LaTeX template Makefile. Build settings live in .latexmkrc (everything ->
+# build/, styles/ on the search path). `make build` copies the finished PDF up
+# to the repo root as the committable deliverable.
 #
 #   make                 build hw.tex (the default)
 #   make FILE=essay      build essay.tex (runs biber for the bibliography)
@@ -20,6 +21,7 @@ FILE ?= hw
 
 build:
 	latexmk $(FILE).tex
+	@cp -f build/$(FILE).pdf $(FILE).pdf   # publish a committable copy of the PDF at the repo root
 
 new:
 	@test -n "$(Q)" || { echo "usage: make new Q=<number> [FILE=hw|essay]"; exit 1; }

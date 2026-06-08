@@ -1,4 +1,5 @@
-## latexmk aux/build directory (see .latexmkrc) — the PDF stays at the top level
+## latexmk build directory (see .latexmkrc) — all build output incl. the PDF;
+## `make build` copies the final PDF to the repo root as the committable deliverable
 /build/
 
 ## Core latex/pdflatex auxiliary files:
