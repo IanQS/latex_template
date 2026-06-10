@@ -22,6 +22,19 @@ BIBINPUTS = ".:"
 [language-server.texlab.config.texlab]
 auxDirectory = "build"
 
+# Completion matching. The default "fuzzy-ignore-case" does subsequence matching,
+# so typing "shiu" matches keys like "gerstnerlabCNS21BiophysicsNeurons2023"
+# (the letters s-h-i-u appear in order). "prefix-ignore-case" keeps only items
+# that START with what you typed -- so "shiu" matches Zotero keys beginning
+# "shiu..." (author-first keys), killing the false positives.
+[language-server.texlab.config.texlab.completion]
+matcher = "prefix-ignore-case"
+
+# Render the actual symbol glyph (e.g. ∑, α) when hovering a command/symbol,
+# instead of a textual description.
+[language-server.texlab.config.texlab.hover]
+symbols = "glyph"
+
 [language-server.texlab.config.texlab.build]
 executable = "latexmk"
 # No -pdf (that forces pdfLaTeX) and no -outdir: .latexmkrc is the single source
